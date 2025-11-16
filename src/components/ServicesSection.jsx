@@ -1,7 +1,8 @@
 import React from "react";
-import { Hammer, Home, Wrench, PaintBucket, Drill, Shield } from "lucide-react"
+import { Hammer, Home, Wrench, PaintBucket, Shield } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Button } from "./ui/button"
+import { ArrowRight, CheckCircle } from "lucide-react"
 
 const services = [
   {
@@ -103,9 +104,12 @@ export function ServicesSection() {
         </div>
 
         <div className="text-center">
-          <Button size="lg">
-            Get Started with a Free Consultation
-          </Button>
+          <a href="#contact">
+            <Button size="lg" className="gap-2">
+              Get Free Quote
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </a>
         </div>
       </div>
     </section>

@@ -56,15 +56,19 @@ export function ImageCarousel() {
   }
 
   return (
-    <div className="relative w-full  rounded-lg overflow-hidden shadow-lg">
+    <div className="relative w-full  rounded-lg overflow-hidden ">
       {/* Main Image */}
-      <div className="relative w-full h-full bg-white">
-        <img
-          src={carouselImages[currentIndex].src}
-          alt={carouselImages[currentIndex].alt}
-          className={`w-auto h-full object-cover ${carouselImages[currentIndex].cropBottom ? "object-bottom" : ""
-            }`}
-        />
+      <div className="  w-full h-full bg-white">
+        <div className="flex justify-center items-center w-full h-full bg-white">
+          <img
+            src={carouselImages[currentIndex].src}
+            alt={carouselImages[currentIndex].alt}
+            className={`w-auto h-full object-center `}
+          />
+
+        </div>
+
+
 
         {/* Overlay for better text contrast */}
         <div className="absolute inset-0 bg-black/20" />
