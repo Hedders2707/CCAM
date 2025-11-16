@@ -3,35 +3,40 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useEffect } from "react"
 import { Button } from "./ui/button"
 import "/src/style.css"
+import CCAMLogo from "../assets/CCAMLogo.jpg";
+import BenchtopBefore from "../assets/BenchtopBefore.jpg";
+import BenchtopAfter from "../assets/BenchtopAfter.jpg";
+import DeckBefore from "../assets/DeckBefore.jpg";
+import DeckAfter from "../assets/DeckAfter.jpg";
 
 
 const carouselImages = [
   {
-    src: "/images/CAPITAL CRAFT_ logo_blue.jpg",
-    alt: "Capital Craft and Maintaince Logo"
+    src: CCAMLogo,
+    alt: "Capital Craft and Maintenance Logo",
   },
   {
-    src: "/images/BenchtopBefore.jpg",
+    src: BenchtopBefore,
     alt: "Bench Before",
-    cap: "Before"
+    cap: "Before",
   },
   {
-    src: "/images/BenchtopAfter.jpg",
+    src: BenchtopAfter,
     alt: "Carpenter working on custom furniture",
-    cap: "After"
+    cap: "After",
   },
   {
-    src: "/images/DeckBefore.jpg",
+    src: DeckBefore,
     alt: "Home renovation and repairs",
-    cap: "Before"
+    cap: "Before",
   },
   {
-    src: "/images/DeckAfter.jpg",
+    src: DeckAfter,
     alt: "Professional carpentry tools",
     cropBottom: true,
-    cap: "After"
-  }
-]
+    cap: "After",
+  },
+];
 
 export function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)

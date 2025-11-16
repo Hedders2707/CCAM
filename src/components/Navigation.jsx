@@ -9,6 +9,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import CCAMSmall from "../assets/CCAMSmall.jpg";
 
 const navItems = [
   { title: "Home", icon: Home, href: "#home" },
@@ -19,6 +20,7 @@ const navItems = [
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  console.log("LOGO PATH:", CCAMSmall);
 
   return (
     <header className="sticky top-0 z-50 bg-primary text-primary-foreground border-b border-primary-foreground/20">
@@ -27,7 +29,7 @@ export function Navigation() {
           {/* Logo */}
           <div href="#home" className="flex items-center gap-3">
             <div className="w-20 h-20 border-3 border-accent bg-white rounded-lg flex items-center justify-center">
-              <img className="pl-0.5" src="/images/CAPITAL CRAFT_ logo_blue.jpg" />
+              <img className="pl-0.5" src={CCAMSmall} />
             </div>
             <div>
               <h1 className="text-xl font-bold text-background">Capital Craft</h1>
