@@ -33,7 +33,6 @@ const carouselImages = [
   {
     src: DeckAfter,
     alt: "Professional carpentry tools",
-    cropBottom: true,
     cap: "After",
   },
 ];
