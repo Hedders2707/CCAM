@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
-import "/src/style.css";
 
 import CCAMLogo from "../assets/CCAMLogo.jpg";
 import BenchtopBefore from "../assets/BenchtopBefore.jpg";
@@ -62,7 +61,7 @@ export function ImageCarousel() {
       <div className="w-full h-full bg-white">
         <div className="flex justify-center items-center w-full h-full bg-white">
           <img
-            src={BenchtopBefore}
+            src={src}
             alt={alt}
             className="w-auto h-full object-center"
           />
@@ -73,7 +72,7 @@ export function ImageCarousel() {
 
         {/* Caption for Before/After */}
         {cap && (
-          <div className="absolute inset-0 flex justify-center items-center">
+          <div className="absolute inset-0 flex justify-center items-top">
             <span className="text-white text-5xl font-bold drop-shadow-lg">
               {cap}
             </span>

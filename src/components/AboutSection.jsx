@@ -3,6 +3,8 @@ import { Badge } from "./ui/badge"
 import { Card } from "./ui/card"
 import HouseFraming from "../assets/HouseFraming.jpg"
 
+
+
 export function AboutSection() {
   return (
     <section className="py-16 px-8" id="about">
