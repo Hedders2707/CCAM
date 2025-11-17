@@ -16,114 +16,69 @@ export function ImageCarousel() {
   // Auto-rotate every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
-      );
+      setCurrentIndex((prev) => (prev + 1) % totalSlides);
     }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
   const goToPrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
   };
 
-  // Hard-coded image + caption per index
-  const renderImage = () => {
-    switch (currentIndex) {
-      case 0:
-        return (
-          <>
-            <img
-              src={CCAMLogo}
-              alt="Capital Craft and Maintenance Logo"
-              className="w-auto h-full object-center"
-            />
-          </>
-        );
-      case 1:
-        return (
-          <>
-            <img
-              src={BenchtopBefore}
-              alt="Bench Before"
-              className="w-auto h-full object-center"
-            />
-            <div className="absolute inset-0 flex justify-center items-top">
-              <span className="text-white text-5xl font-bold drop-shadow-lg">
-                Before
-              </span>
-            </div>
-          </>
-        );
-      case 2:
-        return (
-          <>
-            <img
-              src={BenchtopAfter}
-              alt="Carpenter working on custom furniture"
-              className="w-auto h-full object-center"
-            />
-            <div className="absolute inset-0 flex justify-center items-top">
-              <span className="text-white text-5xl font-bold drop-shadow-lg">
-                After
-              </span>
-            </div>
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <img
-              src={DeckBefore}
-              alt="Home renovation and repairs"
-              className="w-auto h-full object-center"
-            />
-            <div className="absolute inset-0 flex justify-center items-top">
-              <span className="text-white text-5xl font-bold drop-shadow-lg">
-                Before
-              </span>
-            </div>
-          </>
-        );
-      case 4:
-        return (
-          <>
-            <img
-              src={DeckAfter}
-              alt="Professional carpentry tools"
-              className="w-auto h-full object-center"
-            />
-            <div className="absolute inset-0 flex justify-center items-top">
-              <span className="text-white text-5xl font-bold drop-shadow-lg">
-                After
-              </span>
-            </div>
-          </>
-        );
-      default:
-        return null;
-    }
-  };
+  // Hard-code which image/alt/caption to use for each index
+  let src;
+  let alt;
+  let cap = null;
+
+  if (currentIndex === 0) {
+    src = CCAMLogo;
+    alt = "Capital Craft and Maintenance Logo";
+  } else if (currentIndex === 1) {
+    src = BenchtopBefore;
+    alt = "Bench Before";
+    cap = "Before";
+  } else if (currentIndex === 2) {
+    src = BenchtopAfter;
+    alt = "Carpenter working on custom furniture";
+    cap = "After";
+  } else if (currentIndex === 3) {
+    src = DeckBefore;
+    alt = "Home renovation and repairs";
+    cap = "Before";
+  } else if (currentIndex === 4) {
+    src = DeckAfter;
+    alt = "Professional carpentry tools";
+    cap = "After";
+  }
 
   return (
     <div className="relative w-full rounded-lg overflow-hidden">
       {/* Main Image */}
       <div className="w-full h-full bg-white">
-        <div className="flex justify-center items-center w-full h-full bg-white relative">
-          {/* Dark overlay for contrast */}
-          <div className="absolute inset-0 bg-black/20" />
-          {/* Hard-coded image + caption */}
-          {renderImage()}
+        <div className="flex justify-center items-center w-full h-full bg-white">
+          <img
+            src={BenchtopBefore}
+            alt={alt}
+            className="w-auto h-full object-center"
+          />
         </div>
+
+        {/* Overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/20" />
+
+        {/* Caption for Before/After */}
+        {cap && (
+          <div className="absolute inset-0 flex justify-center items-center">
+            <span className="text-white text-5xl font-bold drop-shadow-lg">
+              {cap}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Navigation Arrows */}
