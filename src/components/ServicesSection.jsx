@@ -2,7 +2,7 @@ import React from "react";
 import { Hammer, Home, Wrench, PaintBucket, Shield } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Button } from "./ui/button"
-import { ArrowRight, CheckCircle } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 const services = [
   {

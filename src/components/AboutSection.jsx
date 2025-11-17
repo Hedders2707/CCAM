@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge } from "./ui/badge"
-import { Card, CardContent, CardHeader } from "./ui/card"
+import { Card } from "./ui/card"
+import HouseFraming from "../assets/HouseFraming.jpg"
 
 export function AboutSection() {
   return (
@@ -12,7 +13,7 @@ export function AboutSection() {
             <Card className="overflow-hidden">
               <div className="aspect-[4/3]">
                 <img
-                  src="\images\HouseFraming.jpg"
+                  src={HouseFraming}
                   alt="Master carpenter at work"
                   className="w-full h-full object-cover"
                 />
