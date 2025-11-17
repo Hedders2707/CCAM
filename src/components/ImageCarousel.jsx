@@ -11,7 +11,7 @@ import DeckAfter from "../assets/DeckAfter.jpg";
 export function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // 🚀 FIX: Put the array *inside* the component:
+  // ⬇️ MOVE IMAGES **INSIDE** THE COMPONENT
   const carouselImages = [
     {
       src: CCAMLogo,
@@ -39,11 +39,11 @@ export function ImageCarousel() {
     },
   ];
 
-  // Auto-rotate
+  // Auto-rotate every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) =>
-        prev === carouselImages.length - 1 ? 0 : prev + 1
+      setCurrentIndex((prevIndex) =>
+        prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
 
@@ -87,11 +87,11 @@ export function ImageCarousel() {
         )}
       </div>
 
-      {/* Arrows */}
+      {/* Navigation Arrows */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black"
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-black"
         onClick={goToPrevious}
       >
         <ChevronLeft className="w-5 h-5" />
@@ -100,14 +100,14 @@ export function ImageCarousel() {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-black"
         onClick={goToNext}
       >
         <ChevronRight className="w-5 h-5" />
       </Button>
 
       {/* Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {carouselImages.map((_, index) => (
           <button
             key={index}
