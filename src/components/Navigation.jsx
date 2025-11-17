@@ -20,7 +20,6 @@ const navItems = [
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  console.log("LOGO PATH:", CCAMSmall);
 
   return (
     <header className="sticky top-0 z-50 bg-primary text-primary-foreground border-b border-primary-foreground/20">
