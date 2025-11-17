@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
+import "/src/style.css";
 
 import CCAMLogo from "../assets/CCAMLogo.jpg";
 import BenchtopBefore from "../assets/BenchtopBefore.jpg";
@@ -10,40 +11,13 @@ import DeckAfter from "../assets/DeckAfter.jpg";
 
 export function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // ⬇️ MOVE IMAGES **INSIDE** THE COMPONENT
-  const carouselImages = [
-    {
-      src: CCAMLogo,
-      alt: "Capital Craft and Maintenance Logo",
-    },
-    {
-      src: BenchtopBefore,
-      alt: "Bench Before",
-      cap: "Before",
-    },
-    {
-      src: BenchtopAfter,
-      alt: "Carpenter working on custom furniture",
-      cap: "After",
-    },
-    {
-      src: DeckBefore,
-      alt: "Home renovation and repairs",
-      cap: "Before",
-    },
-    {
-      src: DeckAfter,
-      alt: "Professional carpentry tools",
-      cap: "After",
-    },
-  ];
+  const totalSlides = 5;
 
   // Auto-rotate every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === carouselImages.length - 1 ? 0 : prevIndex + 1
+        prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
 
@@ -51,40 +25,105 @@ export function ImageCarousel() {
   }, []);
 
   const goToPrevious = () => {
-    setCurrentIndex(
-      currentIndex === 0 ? carouselImages.length - 1 : currentIndex - 1
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
     );
   };
 
   const goToNext = () => {
-    setCurrentIndex(
-      currentIndex === carouselImages.length - 1 ? 0 : currentIndex + 1
+    setCurrentIndex((prevIndex) =>
+      prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
     );
+  };
+
+  // Hard-coded image + caption per index
+  const renderImage = () => {
+    switch (currentIndex) {
+      case 0:
+        return (
+          <>
+            <img
+              src={CCAMLogo}
+              alt="Capital Craft and Maintenance Logo"
+              className="w-auto h-full object-center"
+            />
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <img
+              src={BenchtopBefore}
+              alt="Bench Before"
+              className="w-auto h-full object-center"
+            />
+            <div className="absolute inset-0 flex justify-center items-top">
+              <span className="text-white text-5xl font-bold drop-shadow-lg">
+                Before
+              </span>
+            </div>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <img
+              src={BenchtopAfter}
+              alt="Carpenter working on custom furniture"
+              className="w-auto h-full object-center"
+            />
+            <div className="absolute inset-0 flex justify-center items-top">
+              <span className="text-white text-5xl font-bold drop-shadow-lg">
+                After
+              </span>
+            </div>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <img
+              src={DeckBefore}
+              alt="Home renovation and repairs"
+              className="w-auto h-full object-center"
+            />
+            <div className="absolute inset-0 flex justify-center items-top">
+              <span className="text-white text-5xl font-bold drop-shadow-lg">
+                Before
+              </span>
+            </div>
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <img
+              src={DeckAfter}
+              alt="Professional carpentry tools"
+              className="w-auto h-full object-center"
+            />
+            <div className="absolute inset-0 flex justify-center items-top">
+              <span className="text-white text-5xl font-bold drop-shadow-lg">
+                After
+              </span>
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
     <div className="relative w-full rounded-lg overflow-hidden">
       {/* Main Image */}
       <div className="w-full h-full bg-white">
-        <div className="flex justify-center items-center w-full h-full bg-white">
-          <img
-            src={carouselImages[currentIndex].src}
-            alt={carouselImages[currentIndex].alt}
-            className="w-auto h-full object-center"
-          />
+        <div className="flex justify-center items-center w-full h-full bg-white relative">
+          {/* Dark overlay for contrast */}
+          <div className="absolute inset-0 bg-black/20" />
+          {/* Hard-coded image + caption */}
+          {renderImage()}
         </div>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/20" />
-
-        {/* Caption */}
-        {carouselImages[currentIndex].cap && (
-          <div className="absolute inset-0 flex justify-center items-top">
-            <span className="text-white text-5xl font-bold drop-shadow-lg">
-              {carouselImages[currentIndex].cap}
-            </span>
-          </div>
-        )}
       </div>
 
       {/* Navigation Arrows */}
@@ -106,9 +145,9 @@ export function ImageCarousel() {
         <ChevronRight className="w-5 h-5" />
       </Button>
 
-      {/* Dots */}
+      {/* Dots Indicator */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {carouselImages.map((_, index) => (
+        {Array.from({ length: totalSlides }).map((_, index) => (
           <button
             key={index}
             className={`w-3 h-3 rounded-full transition-colors ${index === currentIndex ? "bg-white" : "bg-white/50"
