@@ -97,7 +97,7 @@ export function Navigation() {
               <div className="px-3 py-2 text-sm text-primary-foreground/80 border-t border-primary-foreground/20 mt-2">
                 <div className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  <span>(555) 123-4567</span>
+                  <span>+61 413 315 700</span>
                 </div>
               </div>
             </div>
