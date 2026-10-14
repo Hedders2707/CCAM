@@ -52,7 +52,7 @@ export function HeroSection() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:gap-16 lg:px-8 lg:py-24">
         {/* Content */}
         <div>
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-brand">
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-1.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-brand">
             Canberra · Queanbeyan · Jerrabomberra
           </p>
           <h1 className="text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-6xl">
