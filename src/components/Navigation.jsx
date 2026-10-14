@@ -1,107 +1,89 @@
-import React from "react";
-import { useState } from "react";
-import {
-  Home,
-  Hammer,
-  Users,
-  Phone,
-  Menu,
-  X,
-} from "lucide-react";
-import { Button } from "./ui/button";
-import CCAMSmall from "../assets/CCAMSmall.jpg";
+import React, { useEffect, useState } from "react";
+import { Phone, Menu, X } from "lucide-react";
+import { Logo } from "./Logo";
+import { buttonClasses } from "./ui/button";
+import { PHONE_DISPLAY, PHONE_HREF } from "../siteInfo";
 
 const navItems = [
-  { title: "Home", icon: Home, href: "#home" },
-  { title: "Services", icon: Hammer, href: "#services" },
-  { title: "About Us", icon: Users, href: "#about" },
-  { title: "Contact", icon: Phone, href: "#contact" },
+  { title: "Our Work", href: "#home" },
+  { title: "Services", href: "#services" },
+  { title: "About", href: "#about" },
+  { title: "Contact", href: "#contact" },
 ];
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-primary text-primary-foreground border-b border-primary-foreground/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-25">
-          {/* Logo */}
-          <div href="#home" className="flex items-center gap-3">
-            <div className="w-20 h-20 border-3 border-accent bg-white rounded-lg flex items-center justify-center">
-              <img className="pl-0.5" src={CCAMSmall} />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-background">Capital Craft</h1>
-              <p className="text-m text-primary-foreground/80">& Maintenance</p>
-            </div>
-          </div>
+    <header
+      className={`sticky top-0 z-50 border-b bg-paper/85 backdrop-blur-md transition-shadow ${isScrolled ? "border-border shadow-sm" : "border-transparent"}`}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-18 items-center justify-between gap-4">
+          <Logo />
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  className="flex items-center gap-2 text-primary-foreground hover:text-accent transition-colors"
-                >
-                  <Icon className="w-4 h-4" />
-                  {item.title}
-                </a>
-              );
-            })}
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+            {navItems.map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                className="text-sm font-medium text-ink/75 transition-colors hover:text-primary"
+              >
+                {item.title}
+              </a>
+            ))}
           </nav>
 
-          {/* Contact Info & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            <div className="hidden lg:flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+61 413 315 700</span>
-              </div>
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:block">
+              <a href={PHONE_HREF} className={buttonClasses({ size: "sm" })}>
+                <Phone className="h-4 w-4" />
+                {PHONE_DISPLAY}
+              </a>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden text-primary-foreground"
+            {/* Compact call button on small phones */}
+            <a
+              href={PHONE_HREF}
+              aria-label={`Call ${PHONE_DISPLAY}`}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white sm:hidden"
+            >
+              <Phone className="h-4 w-4" />
+            </a>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-accent md:hidden"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
-            </Button>
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-primary-foreground/20">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <a
-                    key={item.title}
-                    href={item.href}
-                    className="flex items-center gap-3 px-3 py-2 text-primary-foreground hover:bg-accent hover:text-accent-foreground rounded-md transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {item.title}
-                  </a>
-                );
-              })}
-              <div className="px-3 py-2 text-sm text-primary-foreground/80 border-t border-primary-foreground/20 mt-2">
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
-                  <span>+61 413 315 700</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <nav className="border-t border-border pb-4 pt-2 md:hidden" aria-label="Mobile">
+            {navItems.map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                className="block rounded-lg px-3 py-3 text-base font-medium text-ink hover:bg-accent hover:text-accent-foreground"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.title}
+              </a>
+            ))}
+          </nav>
         )}
       </div>
     </header>
