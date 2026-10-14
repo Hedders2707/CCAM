@@ -5,11 +5,13 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { useForm, ValidationError } from "@formspree/react";
-import { PHONE_DISPLAY, PHONE_HREF, EMAIL } from "../siteInfo";
+import { InstagramIcon } from "./InstagramIcon";
+import { PHONE_DISPLAY, PHONE_HREF, EMAIL, INSTAGRAM_URL } from "../siteInfo";
 
 const contactDetails = [
   { icon: Phone, label: "Phone", value: PHONE_DISPLAY, href: PHONE_HREF },
   { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
+  { icon: InstagramIcon, label: "Instagram", value: "@capitalcraftandmaintence", href: INSTAGRAM_URL, external: true },
   { icon: MapPin, label: "Service area", value: "Canberra ACT\nQueanbeyan & Jerrabomberra NSW" },
   { icon: Clock, label: "Business hours", value: "Mon – Fri: 7:00 AM – 6:00 PM\nSat: 8:00 AM – 4:00 PM\nSun: By appointment" },
 ];
@@ -35,7 +37,7 @@ export function ContactSection() {
           </p>
 
           <dl className="mt-10 space-y-6">
-            {contactDetails.map(({ icon: Icon, label, value, href }) => (
+            {contactDetails.map(({ icon: Icon, label, value, href, external }) => (
               <div key={label} className="flex items-start gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-brand">
                   <Icon className="h-5 w-5" />
@@ -44,7 +46,11 @@ export function ContactSection() {
                   <dt className="text-sm font-medium text-white/55">{label}</dt>
                   <dd className="mt-0.5 whitespace-pre-line font-medium text-white">
                     {href ? (
-                      <a href={href} className="underline-offset-4 hover:text-brand hover:underline">
+                      <a
+                        href={href}
+                        className="underline-offset-4 hover:text-brand hover:underline"
+                        {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+                      >
                         {value}
                       </a>
                     ) : (

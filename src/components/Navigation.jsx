@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 import { Logo } from "./Logo";
 import { buttonClasses } from "./ui/button";
-import { PHONE_DISPLAY, PHONE_HREF } from "../siteInfo";
+import { InstagramIcon } from "./InstagramIcon";
+import { PHONE_DISPLAY, PHONE_HREF, INSTAGRAM_URL } from "../siteInfo";
 
 const navItems = [
   { title: "Our Work", href: "#home" },
@@ -44,6 +45,15 @@ export function Navigation() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Capital Craft on Instagram"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink/75 transition-colors hover:bg-accent hover:text-primary"
+            >
+              <InstagramIcon className="h-5 w-5" />
+            </a>
             <div className="hidden sm:block">
               <a href={PHONE_HREF} className={buttonClasses({ size: "sm" })}>
                 <Phone className="h-4 w-4" />

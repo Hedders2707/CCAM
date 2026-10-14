@@ -5,6 +5,8 @@ import { ServicesSection } from "./components/ServicesSection";
 import { AboutSection } from "./components/AboutSection";
 import { ContactSection } from "./components/ContactSection";
 import { Logo } from "./components/Logo";
+import { InstagramIcon } from "./components/InstagramIcon";
+import { INSTAGRAM_URL } from "./siteInfo";
 
 export default function App() {
   return (
@@ -23,7 +25,18 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-ink py-10 text-white">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 sm:px-6 md:flex-row md:items-center lg:px-8">
-          <Logo inverse />
+          <div className="flex items-center gap-4">
+            <Logo inverse />
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Capital Craft on Instagram"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-brand transition-colors hover:bg-brand hover:text-white"
+            >
+              <InstagramIcon className="h-5 w-5" />
+            </a>
+          </div>
           <p className="text-sm text-white/55">
             © {new Date().getFullYear()} Capital Craft and Maintenance. Qualified, bonded and insured.
           </p>
